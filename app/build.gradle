@@ -38,10 +38,24 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "boolean", "RELEASE", "false"
         }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            crunchPngs false
+
+            proguardFile '/proguard/proguard-retrofit2.pro'
+            proguardFile '/proguard/proguard-constraint-layout.pro'
+            proguardFile '/proguard/proguard-okhttp3.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), '/proguard/proguard-constraint-layout.pro'
+
+            buildConfigField "boolean", "RELEASE", "true"
+        }
+    }
     }
 }
 
