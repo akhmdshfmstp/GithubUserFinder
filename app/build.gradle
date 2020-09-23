@@ -82,6 +82,10 @@ android {
         ignoreWarnings true
         quiet true
     }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 }
 
