@@ -82,6 +82,10 @@ dependencies {
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
     api "androidx.lifecycle:lifecycle-runtime:$androidx_lifecycle_version"
     api "androidx.lifecycle:lifecycle-extensions:$androidx_lifecycle_version"
+
+    /* margin */
+    api 'com.intuit.sdp:sdp-android:1.0.6'
+
     /* android test */
     testImplementation "junit:junit:4.13"
     testImplementation "androidx.test:core:1.3.0"
