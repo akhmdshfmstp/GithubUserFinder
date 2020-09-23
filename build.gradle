@@ -11,14 +11,15 @@ buildscript {
     ext.target_sdk_version = 29
     ext.version_code = code
     ext.version_name = "${major}.${minor}.${patch}"
+
+    ext.tools_android_gradle_version = '4.0.1'
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.1"
+        classpath "com.android.tools.build:gradle:$tools_android_gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
