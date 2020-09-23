@@ -4,6 +4,8 @@ buildscript {
     def major = 1
     def minor = 0
     def patch = 0
+    ext.version_code = code
+    ext.version_name = "${major}.${minor}.${patch}"
     repositories {
         google()
         jcenter()
