@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".design.LoadingView">
+
+    <ImageView
+        android:id="@+id/img_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/view_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/_24sdp"
+        android:paddingEnd="@dimen/_24sdp"
+        tools:ignore="ExtraText">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_progress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:elevation="2dp"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="loading-eel.json"
+            app:lottie_loop="true"
+            tools:targetApi="lollipop" />
+
+        <ImageView
+            android:id="@+id/img_info"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:paddingBottom="@dimen/_16sdp" />
+
+        <TextView
+            android:id="@+id/txt_progress_subtitle"
+            style="@style/SemiBoldFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/text_normal"
+            android:textStyle="bold"
+            tools:text="This is Subtitle" />
+
+        <TextView
+            android:id="@+id/txt_title"
+            style="@style/SemiBoldFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/text_big"
+            android:textStyle="bold"
+            tools:text="This is Title" />
+
+        <TextView
+            android:id="@+id/txt_message"
+            style="@style/LightFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/text_normal"
+            tools:text="This is message"
+            tools:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btn_retry"
+            style="@style/BoldFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_44sdp"
+            android:background="@color/colorPrimaryDark"
+            android:paddingStart="@dimen/_16sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            tools:text="@string/action_retry"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+</RelativeLayout>
