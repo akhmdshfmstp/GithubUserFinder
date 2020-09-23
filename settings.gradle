@@ -1,3 +1,4 @@
+include ':datamodule'
 include ':framework'
 include ':app'
 rootProject.name = "User Finder"
