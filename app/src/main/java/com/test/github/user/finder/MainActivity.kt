@@ -1,4 +1,4 @@
-package com.test.github.user.user.finder
+package com.test.github.user.finder
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

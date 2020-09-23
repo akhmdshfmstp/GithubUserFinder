@@ -1,4 +1,4 @@
-package com.test.github.user.user.finder
+package com.test.github.user.finder
 
 import org.junit.Test
 
