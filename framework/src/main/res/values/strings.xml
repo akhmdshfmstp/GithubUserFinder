@@ -1,0 +1,19 @@
+<resources>
+    <string name="pl_loading">Loading&#8230;</string>
+    <string name="action_retry">Retry</string>
+    <string name="me_connection_title">There is no internet connection</string>
+    <string name="me_connection">Please check your internet connection again to load the page</string>
+    <string name="me_time_out_title">Connection lost</string>
+    <string name="me_time_out">Please check your internet connection again to load the page</string>
+    <string name="me_unknown_title">There is an error</string>
+    <string name="me_unknown">Please access this page in a moment</string>
+    <string name="me_server_down_title">Sorry</string>
+    <string name="me_server_down">Currently, system maintenance is being carried out to improve service quality. Please try again later.</string>
+    <string name="me_server_title">An error occurred on the server</string>
+    <string name="me_server">Sorry, our server is down, please access this page in a moment.</string>
+    <string name="fn_search_user" translatable="false">Search User</string>
+    <string name="me_title_oops" translatable="false">Oops,</string>
+    <string name="me_search_key_required" translatable="false">Search key is required.</string>
+    <string name="action_search" translatable="false">Search</string>
+    <string name="not_found" translatable="false">User not found</string>
+</resources>
