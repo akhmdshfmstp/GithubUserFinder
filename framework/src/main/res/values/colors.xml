@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1876de</color>
+    <color name="colorPrimaryDark">#0062b1</color>
+    <color name="colorAccent">#fedd00</color>
+    <color name="primaryTextColor">#262626</color>
+    <color name="secondaryTextColor">#333333</color>
+
+    <color name="btnGradientStartYellow">#fedd00</color>
+    <color name="btnGradientEndYellow">#fedd00</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>
