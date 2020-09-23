@@ -98,6 +98,12 @@ android {
 }
 
 dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    debugImplementation "com.ashokvarma.android:gander-imdb:$gander_version"
+    releaseImplementation "com.ashokvarma.android:gander-no-op:$gander_version"
+
     /* android test */
     testImplementation "junit:junit:4.13"
     testImplementation "androidx.test:core:1.3.0"
