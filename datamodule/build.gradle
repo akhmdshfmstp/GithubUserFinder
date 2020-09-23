@@ -41,6 +41,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(project(":framework"))
     debugImplementation "com.ashokvarma.android:gander-imdb:$gander_version"
     releaseImplementation "com.ashokvarma.android:gander-no-op:$gander_version"
 }
