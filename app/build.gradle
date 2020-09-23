@@ -12,8 +12,29 @@ android {
         targetSdkVersion target_sdk_version
         versionCode version_code
         versionName version_name
+    flavorDimensions "API_ENV"
+    productFlavors {
+        dev {
+            dimension "API_ENV"
+            versionNameSuffix "-dev"
+            buildConfigField "String", "BUILD_VARIANT", '"dev"'
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+            buildConfigField("String", "API_BASE_URL", '"https://api.github.com/"')
+
+            applicationId "com.test.github.userfinder.dev"
+            resValue "string", "app_name", "User Finder"
+            resValue "string", "package_name", "com.test.github.userfinder.dev"
+        }
+        production {
+            dimension "API_ENV"
+            buildConfigField "String", "BUILD_VARIANT", '"prod"'
+
+            buildConfigField("String", "API_BASE_URL", '"https://api.github.com/"')
+
+            applicationId "com.test.github.userfinder"
+            resValue "string", "app_name", "User Finder"
+            resValue "string", "package_name", "com.test.github.userfinder"
+        }
     }
 
     buildTypes {
