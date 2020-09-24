@@ -10,6 +10,7 @@ import com.test.github.user.finder.presentation.adapter.UserAdapter
 interface MainView : LifecycleView {
     var retryListener: LoadingView.OnRetryListener
     var onRefreshListener: SwipeRefreshLayout.OnRefreshListener
+    var onTouchListener: View.OnTouchListener
     var layoutManager: LinearLayoutManager
     var listAdapter: UserAdapter
     fun onSearchClicked(view: View)

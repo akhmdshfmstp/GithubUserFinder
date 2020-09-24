@@ -16,4 +16,5 @@
     <string name="me_search_key_required" translatable="false">Search key is required.</string>
     <string name="action_search" translatable="false">Search</string>
     <string name="not_found" translatable="false">User not found</string>
+    <string name="header_voice_suggestion" translatable="false">Try saying something...</string>
 </resources>

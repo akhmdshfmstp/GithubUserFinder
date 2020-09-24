@@ -45,13 +45,14 @@ class MainActivity : BaseActivity(),
     override lateinit var binding: ActivityMainBinding
     override val viewModel: MainViewModel by viewModel()
 
+    private val REQ_CODE_SPEECH_INPUT = 101
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         swipeListState()
         setToolbar()
         observeProgressStatus()
         observeData()
-        setListener()
     }
 
     override var retryListener: LoadingView.OnRetryListener = object : LoadingView.OnRetryListener {
@@ -71,6 +72,20 @@ class MainActivity : BaseActivity(),
         false
     )
 
+    @SuppressLint("ClickableViewAccessibility")
+    override var onTouchListener = View.OnTouchListener { _, event ->
+        val drawableRight = 2
+        if (event.action == MotionEvent.ACTION_UP && event.rawX >= binding.textInputSearchUser.right -
+            binding.textInputSearchUser.compoundDrawables[drawableRight].bounds.width()
+        ) {
+            if (!viewModel.clearKeySearch()) {
+                searchByVoice()
+            }
+            return@OnTouchListener true
+        }
+        return@OnTouchListener false
+    }
+
     override var listAdapter = UserAdapter(::onItemClicked) {
         viewModel.retry()
     }
@@ -87,9 +102,13 @@ class MainActivity : BaseActivity(),
         binding.swipeList.isRefreshing = false
     }
 
-    private fun searchUser(view: View) {
+    private fun searchUser(view: View? = null, key: String? = null) {
+        key?.trim()?.let { value ->
+            viewModel.setSearch(value)
+            binding.textInputSearchUser.setSelection(value.length)
+        }
         if (viewModel.isValid()) {
-            ViewHelper.hideKeyboard(this, view)
+            ViewHelper.hideKeyboard(this, view ?: binding.textInputSearchUser)
             viewModel.searchUserByKeyword(
                 ::setRetryAfter
             )
@@ -214,6 +233,31 @@ class MainActivity : BaseActivity(),
                         text.toString().trim().length
                     )
                 }
+    private fun searchByVoice() {
+        val speechRecognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "id-ID")
+        speechRecognizerIntent.putExtra(
+            RecognizerIntent.EXTRA_PROMPT,
+            getString(R.string.header_voice_suggestion)
+        )
+        try {
+            startActivityForResult(
+                speechRecognizerIntent,
+                REQ_CODE_SPEECH_INPUT
+            )
+        } catch (a: ActivityNotFoundException) {
+            // ignore
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQ_CODE_SPEECH_INPUT && resultCode == Activity.RESULT_OK && null !=
+            data
+        ) {
+            data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.let {
+                searchUser(key = it[0])
             }
         }
     }

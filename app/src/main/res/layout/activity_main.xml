@@ -75,7 +75,8 @@
                     android:maxLines="1"
                     android:text="@={vm.keySearch}"
                     android:textColor="@color/secondaryTextColor"
-                    android:textSize="@dimen/text_normal" />
+                    android:textSize="@dimen/text_normal"
+                    app:onTouchListener="@{view.onTouchListener}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
