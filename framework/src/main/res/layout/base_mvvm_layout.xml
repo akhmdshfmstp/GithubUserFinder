@@ -5,11 +5,11 @@
 
         <variable
             name="view"
-            type="com.test.github.userfinder.framework.core.view.BindingView" />
+            type="com.test.github.user.finder.framework.core.view.BindingView" />
 
         <variable
             name="vm"
-            type="com.test.github.userfinder.framework.core.base.BaseViewModel" />
+            type="com.test.github.user.finder.framework.core.base.BaseViewModel" />
     </data>
 
     <View
