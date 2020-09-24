@@ -18,7 +18,8 @@ class UserDataSource(
         exception: Exception?,
         message: String?
     ) -> Unit,
-    private val itemSize: Int
+    private val itemSize: Int,
+    private val runLayoutAnimation: () -> Unit
 ) : BasePageKeyedDataSource<UserDto.Items>() {
 
     override fun loadAfter(
@@ -125,6 +126,7 @@ class UserDataSource(
                                         pageNo + 1
                                     }
                                 }
+                                runLayoutAnimation()
                                 callback.onResult(this, null, nextPageKey)
                             } ?: run {
                             loadInitialEmpty()

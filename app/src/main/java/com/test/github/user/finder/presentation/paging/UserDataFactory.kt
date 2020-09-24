@@ -16,7 +16,8 @@ class UserDataFactory(
         exception: Exception?,
         message: String?
     ) -> Unit,
-    private val itemSize: Int
+    private val itemSize: Int,
+    private val runLayoutAnimation: () -> Unit
 ) : BaseDataSourceFactory<UserDto.Items>() {
 
     val userLiveData = MutableLiveData<UserDataSource>()
@@ -25,7 +26,8 @@ class UserDataFactory(
             keySearch,
             userRepository,
             setRetryAfter,
-            itemSize
+            itemSize,
+            runLayoutAnimation
         )
         userLiveData.postValue(dataSource)
 

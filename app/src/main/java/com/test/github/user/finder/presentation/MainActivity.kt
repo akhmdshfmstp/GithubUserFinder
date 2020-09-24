@@ -11,6 +11,7 @@ import android.text.TextWatcher
 import android.util.MalformedJsonException
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -147,7 +148,7 @@ class MainActivity : BaseActivity(),
         if (viewModel.isValid()) {
             ViewHelper.hideKeyboard(this, view ?: binding.textInputSearchUser)
             viewModel.searchUserByKeyword(
-                ::setRetryAfter
+                ::setRetryAfter, ::runLayoutAnimation
             )
         } else {
             showToast(getString(R.string.me_search_key_required))
@@ -231,7 +232,7 @@ class MainActivity : BaseActivity(),
     private fun observeData() {
         observeData(
             viewModel.getSearchListUser(
-                ::setRetryAfter
+                ::setRetryAfter, ::runLayoutAnimation
             )
         ) { upcomingHeaderList ->
             if (upcomingHeaderList != null) {
@@ -332,4 +333,13 @@ class MainActivity : BaseActivity(),
             show()
         }
     }
+
+    private fun runLayoutAnimation() {
+        val animSlideUp = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_slide_from_bottom)
+        binding.userList.apply {
+            layoutAnimation = animSlideUp
+            scheduleLayoutAnimation()
+        }
+    }
+
 }

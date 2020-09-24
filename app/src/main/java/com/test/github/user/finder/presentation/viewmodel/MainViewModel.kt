@@ -62,10 +62,11 @@ class MainViewModel(private val userRepository: UserRepository) : BasePagedViewM
             callback: PageKeyedDataSource.LoadCallback<Int, UserDto.Items>,
             exception: Exception?,
             message: String?
-        ) -> Unit
+        ) -> Unit,
+        runLayoutAnimation: () -> Unit
     ) {
         if (userList == null) {
-            getSearchListUser(setRetryAfter)
+            getSearchListUser(setRetryAfter, runLayoutAnimation)
         } else {
             sourceFactory?.keySearch = getKeySearch()!!
             sourceFactory?.create()
@@ -79,10 +80,11 @@ class MainViewModel(private val userRepository: UserRepository) : BasePagedViewM
             callback: PageKeyedDataSource.LoadCallback<Int, UserDto.Items>,
             exception: Exception?,
             message: String?
-        ) -> Unit
+        ) -> Unit,
+        runLayoutAnimation: () -> Unit
     ): LiveData<PagedList<UserDto.Items>> {
         if (userList == null) {
-            getSearchListUserFromApi(setRetryAfter)
+            getSearchListUserFromApi(setRetryAfter, runLayoutAnimation)
         }
         return userList as LiveData<PagedList<UserDto.Items>>
     }
@@ -93,14 +95,16 @@ class MainViewModel(private val userRepository: UserRepository) : BasePagedViewM
             callback: PageKeyedDataSource.LoadCallback<Int, UserDto.Items>,
             exception: Exception?,
             message: String?
-        ) -> Unit
+        ) -> Unit,
+        runLayoutAnimation: () -> Unit
     ) {
         val pagedListConfig = pagedListConfig(page)
         sourceFactory = UserDataFactory(
             getKeySearch()!!,
             userRepository,
             setRetryAfter,
-            item
+            item,
+            runLayoutAnimation
         )
 
         userList = LivePagedListBuilder(sourceFactory!!, pagedListConfig).build()
