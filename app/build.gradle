@@ -26,9 +26,9 @@ android {
 
             buildConfigField("String", "API_BASE_URL", '"https://api.github.com/"')
 
-            applicationId "com.test.github.userfinder.dev"
+            applicationId "com.test.github.user.finder.dev"
             resValue "string", "app_name", "User Finder"
-            resValue "string", "package_name", "com.test.github.userfinder.dev"
+            resValue "string", "package_name", "com.test.github.user.finder.dev"
         }
         production {
             dimension "API_ENV"
@@ -36,9 +36,9 @@ android {
 
             buildConfigField("String", "API_BASE_URL", '"https://api.github.com/"')
 
-            applicationId "com.test.github.userfinder"
+            applicationId "com.test.github.user.finder"
             resValue "string", "app_name", "User Finder"
-            resValue "string", "package_name", "com.test.github.userfinder"
+            resValue "string", "package_name", "com.test.github.user.finder"
         }
     }
 

@@ -1,4 +1,4 @@
-package com.test.github.userfinder.framework.design
+package com.test.github.user.finder.framework.design
 
 import android.content.Context
 import android.view.LayoutInflater
