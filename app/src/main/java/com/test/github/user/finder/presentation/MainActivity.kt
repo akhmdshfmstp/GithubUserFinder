@@ -86,6 +86,14 @@ class MainActivity : BaseActivity(),
         return@OnTouchListener false
     }
 
+    override var onEditorActionListener = TextView.OnEditorActionListener { view, actionId, _ ->
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            searchUser(view)
+            return@OnEditorActionListener true
+        }
+        return@OnEditorActionListener false
+    }
+
     override var listAdapter = UserAdapter(::onItemClicked) {
         viewModel.retry()
     }
@@ -185,7 +193,7 @@ class MainActivity : BaseActivity(),
             networkState?.let {
                 listAdapter.setNetworkState(it)
                 if (it.exception != null || it.message != null) {
-                    binding.recyclerViewUpcomingHeader.smoothScrollToPosition(listAdapter.itemCount)
+                    binding.userList.smoothScrollToPosition(listAdapter.itemCount)
                 }
             }
         }
