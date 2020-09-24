@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:drawableEnd="@{vm.keySearch.length() == 0 ? @drawable/ic_search : @drawable/ic_delete}"
+                    android:drawableEnd="@{vm.keySearch.length() == 0 ? @drawable/ic_mic : @drawable/ic_delete}"
                     android:hint="@string/fn_search_user"
                     android:imeOptions="actionSearch"
                     android:inputType="text"
