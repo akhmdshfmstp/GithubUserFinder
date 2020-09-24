@@ -1,8 +1,10 @@
 package com.test.github.user.finder.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.MalformedJsonException
 import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -167,11 +169,22 @@ class MainActivity : BaseActivity(),
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setListener() {
         binding.textInputSearchUser.apply {
             setOnEditorActionListener { _, actionId, event ->
                 if (event != null && event.keyCode === KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE) {
                     searchUser(this)
+                }
+                false
+            }
+            setOnTouchListener { _, event ->
+                val drawableRight = 2
+                if (event.action == MotionEvent.ACTION_UP && event.rawX >= this.right -
+                    this.compoundDrawables[drawableRight].bounds.width()
+                ) {
+                    viewModel.clearKeySearch()
+                    true
                 }
                 false
             }

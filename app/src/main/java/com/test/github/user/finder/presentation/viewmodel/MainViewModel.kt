@@ -41,6 +41,16 @@ class MainViewModel(private val userRepository: UserRepository) : BasePagedViewM
         }
     }
 
+    fun clearKeySearch() {
+        if (!ValidationHelper.isEmpty(getKeySearch())) {
+            setKeySearch("")
+        }
+    }
+
+    fun setKeySearch(value: String) {
+        keySearch.value = value
+    }
+
     fun getKeySearch() = keySearch.value
 
     fun searchUserByKeyword(
