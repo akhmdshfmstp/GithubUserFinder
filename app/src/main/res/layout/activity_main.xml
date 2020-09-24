@@ -96,21 +96,44 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_upcoming_header"
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:paddingTop="@dimen/_8sdp"
             android:visibility="@{safeUnbox(vm.showLoadingView) ? View.GONE : View.VISIBLE}"
-            app:adapter="@{view.listAdapter}"
-            app:layoutManager="@{view.layoutManager}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraint_search_layout"
-            tools:listitem="@layout/item_user"
-            tools:visibility="visible" />
+            app:onRefreshListener="@{view.onRefreshListener}"
+            tools:layout_editor_absoluteX="28dp"
+            tools:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_upcoming_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:visibility="@{safeUnbox(vm.showLoadingView) ? View.GONE : View.VISIBLE}"
+                    app:adapter="@{view.listAdapter}"
+                    app:layoutManager="@{view.layoutManager}"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item_user"
+                    tools:visibility="visible" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <com.test.github.user.finder.framework.design.LoadingView
             android:id="@+id/loading_view"

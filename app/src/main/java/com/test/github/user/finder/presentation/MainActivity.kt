@@ -47,6 +47,7 @@ class MainActivity : BaseActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        swipeListState()
         setToolbar()
         observeProgressStatus()
         observeData()
@@ -76,6 +77,14 @@ class MainActivity : BaseActivity(),
 
     override fun onSearchClicked(view: View) {
         searchUser(view)
+    }
+
+    private fun swipeListState(value: Boolean? = false) {
+        binding.swipeList.isEnabled = value!!
+    }
+
+    private fun swipeListDone() {
+        binding.swipeList.isRefreshing = false
     }
 
     private fun searchUser(view: View) {
@@ -113,10 +122,13 @@ class MainActivity : BaseActivity(),
                         binding.loadingView.showLoading()
                     }
                     NetworkState.LOADED -> {
+                        swipeListState(true)
+                        swipeListDone()
                         viewModel.hideLoading()
                     }
                     NetworkState.EMPTY -> {
                         viewModel.showLoading()
+                        swipeListDone()
                         binding.loadingView.showEmpty(
                             getString(R.string.me_title_oops),
                             getString(R.string.not_found),
@@ -125,6 +137,7 @@ class MainActivity : BaseActivity(),
                     }
                     NetworkState.UNKNOWN -> {
                         viewModel.showLoading()
+                        swipeListDone()
                         binding.loadingView.showError(
                             getString(R.string.me_title_oops),
                             getString(R.string.me_unknown)
@@ -132,6 +145,7 @@ class MainActivity : BaseActivity(),
                     }
                     else                 -> {
                         it.message?.let { message ->
+                            swipeListDone()
                             viewModel.showLoading()
                             binding.loadingView.showError(
                                 getString(R.string.me_title_oops),
@@ -139,6 +153,7 @@ class MainActivity : BaseActivity(),
                             )
                         }
                         it.exception?.let { e ->
+                            swipeListDone()
                             viewModel.showLoading()
                             binding.loadingView.showError(e)
                         }
