@@ -1,9 +1,14 @@
 package com.test.github.user.finder.presentation
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.MalformedJsonException
-import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -22,7 +27,6 @@ import com.test.github.user.finder.framework.core.common.NetworkState
 import com.test.github.user.finder.framework.core.owner.ViewDataBindingOwner
 import com.test.github.user.finder.framework.core.owner.ViewModelOwner
 import com.test.github.user.finder.framework.design.LoadingView
-import com.test.github.user.finder.framework.extention.afterTextChanged
 import com.test.github.user.finder.framework.extention.showToast
 import com.test.github.user.finder.framework.helper.ViewHelper
 import com.test.github.user.finder.presentation.adapter.UserAdapter
@@ -92,6 +96,31 @@ class MainActivity : BaseActivity(),
             return@OnEditorActionListener true
         }
         return@OnEditorActionListener false
+    }
+
+    override var textWatcher: TextWatcher = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+            binding.textInputSearchUser.apply {
+                if (binding.textInputSearchUser.text.toString().startsWith(" ")) {
+                    setText(
+                        text.toString().replace(
+                            " ", ""
+                        )
+                    )
+                    setSelection(
+                        text.toString().trim().length
+                    )
+                }
+            }
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            // ignore
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            // ignore
+        }
     }
 
     override var listAdapter = UserAdapter(::onItemClicked) {
@@ -211,36 +240,6 @@ class MainActivity : BaseActivity(),
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    private fun setListener() {
-        binding.textInputSearchUser.apply {
-            setOnEditorActionListener { _, actionId, event ->
-                if (event != null && event.keyCode === KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE) {
-                    searchUser(this)
-                }
-                false
-            }
-            setOnTouchListener { _, event ->
-                val drawableRight = 2
-                if (event.action == MotionEvent.ACTION_UP && event.rawX >= this.right -
-                    this.compoundDrawables[drawableRight].bounds.width()
-                ) {
-                    viewModel.clearKeySearch()
-                    true
-                }
-                false
-            }
-            afterTextChanged {
-                if (text.toString().startsWith(" ")) {
-                    setText(
-                        text.toString().replace(
-                            " ", ""
-                        )
-                    )
-                    setSelection(
-                        text.toString().trim().length
-                    )
-                }
     private fun searchByVoice() {
         val speechRecognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "id-ID")

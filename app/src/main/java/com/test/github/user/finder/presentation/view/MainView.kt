@@ -1,5 +1,6 @@
 package com.test.github.user.finder.presentation.view
 
+import android.text.TextWatcher
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ interface MainView : LifecycleView {
     var onRefreshListener: SwipeRefreshLayout.OnRefreshListener
     var onTouchListener: View.OnTouchListener
     var onEditorActionListener: TextView.OnEditorActionListener
+    var textWatcher: TextWatcher
     var layoutManager: LinearLayoutManager
     var listAdapter: UserAdapter
     fun onSearchClicked(view: View)

@@ -76,6 +76,7 @@
                     android:text="@={vm.keySearch}"
                     android:textColor="@color/secondaryTextColor"
                     android:textSize="@dimen/text_normal"
+                    app:addTextChangedListener="@{view.textWatcher}"
                     app:onEditorActionListener="@{view.onEditorActionListener}"
                     app:onTouchListener="@{view.onTouchListener}" />
 
