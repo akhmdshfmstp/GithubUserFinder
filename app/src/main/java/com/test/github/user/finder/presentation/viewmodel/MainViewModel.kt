@@ -43,12 +43,8 @@ class MainViewModel(private val userRepository: UserRepository) : BasePagedViewM
 
     fun clearKeySearch() {
         if (!ValidationHelper.isEmpty(getKeySearch())) {
-            setKeySearch("")
+            keySearch.value = ""
         }
-    }
-
-    fun setKeySearch(value: String) {
-        keySearch.value = value
     }
 
     fun getKeySearch() = keySearch.value
@@ -84,7 +80,7 @@ class MainViewModel(private val userRepository: UserRepository) : BasePagedViewM
         return userList as LiveData<PagedList<UserDto.Items>>
     }
 
-    fun getSearchListUserFromApi(
+    private fun getSearchListUserFromApi(
         setRetryAfter: (
             params: PageKeyedDataSource.LoadParams<Int>,
             callback: PageKeyedDataSource.LoadCallback<Int, UserDto.Items>,
