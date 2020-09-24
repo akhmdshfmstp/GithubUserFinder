@@ -234,9 +234,9 @@ class MainActivity : BaseActivity(),
             viewModel.getSearchListUser(
                 ::setRetryAfter, ::runLayoutAnimation
             )
-        ) { upcomingHeaderList ->
-            if (upcomingHeaderList != null) {
-                listAdapter.submitList(upcomingHeaderList)
+        ) {
+            if (it != null) {
+                listAdapter.submitList(it)
             }
         }
     }
