@@ -262,7 +262,6 @@ class MainActivity : BaseActivity(),
             a.message?.let {
                 showToast(it)
             }
-            // ignore
         }
     }
 
