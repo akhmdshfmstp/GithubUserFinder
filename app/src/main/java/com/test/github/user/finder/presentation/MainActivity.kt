@@ -259,9 +259,7 @@ class MainActivity : BaseActivity(),
                 REQ_CODE_SPEECH_INPUT
             )
         } catch (a: ActivityNotFoundException) {
-            a.message?.let {
-                showToast(it)
-            }
+            showToast(getString(R.string.me_not_support_voice))
         }
     }
 
