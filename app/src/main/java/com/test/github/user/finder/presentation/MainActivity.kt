@@ -246,6 +246,8 @@ class MainActivity : BaseActivity(),
 
     private fun searchByVoice() {
         val speechRecognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, packageName)
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1000)
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "id-ID")
         speechRecognizerIntent.putExtra(
             RecognizerIntent.EXTRA_PROMPT,
@@ -257,6 +259,9 @@ class MainActivity : BaseActivity(),
                 REQ_CODE_SPEECH_INPUT
             )
         } catch (a: ActivityNotFoundException) {
+            a.message?.let {
+                showToast(it)
+            }
             // ignore
         }
     }
