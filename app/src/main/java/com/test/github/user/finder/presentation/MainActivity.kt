@@ -111,6 +111,10 @@ class MainActivity : BaseActivity(),
                     setSelection(
                         text.toString().trim().length
                     )
+                } else {
+                    s?.length?.let { length ->
+                        setSelection(length)
+                    }
                 }
             }
         }
@@ -141,9 +145,8 @@ class MainActivity : BaseActivity(),
     }
 
     private fun searchUser(view: View? = null, key: String? = null) {
-        key?.trim()?.let { value ->
+        key?.let { value ->
             viewModel.setSearch(value)
-            binding.textInputSearchUser.setSelection(value.length)
         }
         if (viewModel.isValid()) {
             ViewHelper.hideKeyboard(this, view ?: binding.textInputSearchUser)
